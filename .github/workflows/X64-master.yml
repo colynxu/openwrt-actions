@@ -31,12 +31,7 @@ jobs:
           sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
           sudo -E apt-get -y autoremove --purge
           sudo -E apt-get clean
-    - name: custom app
-      run: |
-         cd package
-         mkdir openwrt-packages
-         cd openwrt-packages  
-         gir clone https://github.com/tzxiaozhen88/koolproxyR.git
+
     
           
     - name: Clone source code
@@ -44,6 +39,12 @@ jobs:
         REPO_URL: https://github.com/Lienol/openwrt
         REPO_BRANCH: dev-master
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+    - name: custom app
+      run: |
+         cd package
+         mkdir openwrt-packages
+         cd openwrt-packages  
+         gir clone https://github.com/tzxiaozhen88/koolproxyR.git
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
