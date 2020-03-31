@@ -39,17 +39,14 @@ jobs:
         REPO_URL: https://github.com/Lienol/openwrt
         REPO_BRANCH: dev-master
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
-    - name: custom app
-      run: |
-         cd package
-         mkdir openwrt-packages
-         cd openwrt-packages  
-         gir clone https://github.com/tzxiaozhen88/koolproxyR.git
+
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
     - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
+      run: cd openwrt\package
+      git clone https://github.com/Leo-Jo/luci-app-koolproxyR
+      cd ..&& ./scripts/feeds install -a
     
     - name: Costom configure file
       run: |
