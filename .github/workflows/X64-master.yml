@@ -46,7 +46,8 @@ jobs:
     - name: Install feeds
       run: cd openwrt\package
       git clone https://github.com/Leo-Jo/luci-app-koolproxyR
-      cd .. && ./scripts/feeds install -a
+      cd ..
+      ./scripts/feeds install -a
     
     - name: Costom configure file
       run: |
