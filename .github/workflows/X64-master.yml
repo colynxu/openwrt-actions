@@ -10,9 +10,9 @@ name: X64-Master
 on:
   schedule:
     - cron: 0 20 * * *
-  push:
-    branches: 
-     - master
+#  push:
+#    branches: 
+#     - master
 
 jobs:
   build:
@@ -42,25 +42,12 @@ jobs:
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
-
-    - name: Install feeds
-      run: cd openwrt\package
-      git clone https://github.com/Leo-Jo/luci-app-koolproxyR
-      cd openwrt
-      ./scripts/feeds install -a
-    
+   
     - name: Costom configure file
       run: |
           cd openwrt
           rm -f .config
-          cp ../x64-master .config
-          
-          # 常用LuCI插件选择:
-          cat >> .config <<EOF
-          CONFIG_PACKAGE_koolproxyR=y
-          EOF
-          
-          
+          cp ../x64-master .config          
           
     - name: Make Defconfig
       run: |
